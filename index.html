@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+   
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+  </head>
+    
+    <style>
+        
+        body{
+            background-color: aliceblue;
+            
+        }
+        
+        #shape{
+            
+            width: 150px;
+            height: 150px;
+            background-color: red;
+            margin: 20px;
+            position: relative;
+        } 
+        
+        #top-block{
+            
+            text-align: center;
+            color: slategrey;
+            font-size: 200%;
+            
+            
+        }
+    
+    </style>
+  <body>  
+      
+      <div id="container">
+      
+          <div id="top-block">
+          
+              <p id="heading">Test your reactions! Click the shapes in the shortest amount of time</p>
+              
+              <p>You took <span id="clock"></span></p>
+          
+          </div>
+          
+          <div id="shape">
+      
+      
+      
+      
+          </div>
+    
+      </div>      
+
+
+      <script type="text/javascript"> 
+          
+          var start = new Date().getTime();
+          
+          function borderControl(){
+              
+              var num = Math.random();
+              if (num < 0.5){
+                  
+                  $("#shape").css("borderRadius",50+"%");
+              }else{
+                  
+                  $("#shape").css("borderRadius",0+"%");
+                  
+              }
+              
+          }
+          
+          function getColor(){
+              
+              var letters = "0123456789ABCDEF".split("");
+              color = "#";
+              for(var i = 0; i < 6; i++){
+                  
+                  color += letters[Math.round(Math.random()*15)];
+              }
+              
+              return color;
+              
+          }
+          
+          function appear(){
+                            
+              $("#shape").css("backgroundColor",getColor);
+              $("#shape").show();
+              $("#shape").css("top", Math.random()*600);
+              $("#shape").css("left", Math.random()*800);
+              start = new Date().getTime();
+          }
+          
+          function clickEvent(){
+          
+              $("#shape").click(function(){
+              
+                  var end = new Date().getTime();
+                  $("#shape").hide();
+                  setTimeout(appear, Math.random()*2000);
+                  var time = (end- start)/1000;              
+                  $("#clock").html(time);
+                  borderControl();
+              
+        
+          });
+          
+          }
+          clickEvent();
+      </script>
+  </body>
+</html>
